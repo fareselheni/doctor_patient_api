@@ -11,6 +11,7 @@ exports.signup = (req, res) => {
     email: req.body.email,
     adresse: req.body.adresse,
     phone_number: req.body.phone_number,
+    gender: req.body.gender,
     password: bcrypt.hashSync(req.body.password, 8),
     // roles:["admin"]
   });
