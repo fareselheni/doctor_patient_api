@@ -8,28 +8,13 @@ module.exports = function(app) {
     );
     next();
   });
-  // app.post(
-  //   "/api/auth/signup",
-  //   [
-  //     verifySignUp.checkDuplicatephoneOrEmail,
-  //     verifySignUp.checkRolesExisted
-  //   ],
-  //   controller.signup
-  // );
   app.post(
-    "/api/auth/signupdoctor",
-    controller.signupDoctor
+    "/api/auth/signup",
+    [
+      verifySignUp.checkDuplicatephoneOrEmail,
+      verifySignUp.checkRolesExisted
+    ],
+    controller.signup
   );
-  app.post(
-    "/api/auth/signuppatient",
-    controller.signupPatient
-  );
-  app.post(
-    "/api/auth/signupadmin",
-    controller.signupAdmin
-  );
-  // app.post("/api/auth/signin", controller.signin);
-  app.post("/api/auth/signindoctor", controller.signindoctor);
-  app.post("/api/auth/signinpatient", controller.signinpatient);
-  app.post("/api/auth/signinadmin", controller.signinadmin);
+  app.post("/api/auth/signin", controller.signin);
 };

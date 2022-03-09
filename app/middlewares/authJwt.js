@@ -16,125 +16,86 @@ verifyToken = (req, res, next) => {
     next();
   });
 };
-// isAdmin = (req, res, next) => {
-//   User.findById(req.userId).exec((err, user) => {
-//     if (err) {
-//       res.status(500).send({ message: err });
-//       return;
-//     }
-//     Role.find(
-//       {
-//         _id: { $in: user.roles }
-//       },
-//       (err, roles) => {
-//         if (err) {
-//           res.status(500).send({ message: err });
-//           return;
-//         }
-//         for (let i = 0; i < roles.length; i++) {
-//           if (roles[i].name === "admin") {
-//             next();
-//             return;
-//           }
-//         }
-//         res.status(403).send({ message: "Require Admin Role!" });
-//         return;
-//       }
-//     );
-//   });
-// };
-// isDoctor = (req, res, next) => {
-//   User.Doctor.findById(req.userId).exec((err, user) => {
-//     if (err) {
-//       res.status(500).send({ message: err });
-//       return;
-//     }
-//     Role.find(
-//       {
-//         _id: { $in: user.roles }
-//       },
-//       (err, roles) => {
-//         if (err) {
-//           res.status(500).send({ message: err });
-//           return;
-//         }
-//         for (let i = 0; i < roles.length; i++) {
-//           if (roles[i].name === "doctor") {
-//             next();
-//             return;
-//           }
-//         }
-//         res.status(403).send({ message: "Require Doctor Role!" });
-//         return;
-//       }
-//     );
-//   });
-// };
 isAdmin = (req, res, next) => {
-  User.Admin.findById(req.userId).exec((err, user) => {
+  User.findById(req.userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    if(user!=null){
-      if (user._id==req.userId)
+    Role.find(
       {
-        next();
-        return
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "admin") {
+            next();
+            return;
+          }
+        }
+        res.status(403).send({ message: "Require Admin Role!" });
+        return;
       }
-    }
-    
-    res.status(403).send({ message: "Require Admin Role!" });
-    return;
-    
+    );
   });
-    
-    
-  
 };
 isDoctor = (req, res, next) => {
-  User.Doctor.findById(req.userId).exec((err, user) => {
+  User.findById(req.userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    if(user!=null){
-      if (user._id==req.userId)
+    Role.find(
       {
-        next();
-        return
+        _id: { $in: user.roles }
+      },
+      (err, roles) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        for (let i = 0; i < roles.length; i++) {
+          if (roles[i].name === "doctor") {
+            next();
+            return;
+          }
+        }
+        res.status(403).send({ message: "Require Doctor Role!" });
+        return;
       }
-    }
-    
-    res.status(403).send({ message: "Require Doctor Role!" });
-    return;
-    
+    );
   });
-    
-    
-  
 };
 isPatient = (req, res, next) => {
-    User.Patient.findById(req.userId).exec((err, user) => {
+    User.findById(req.userId).exec((err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
-      if(user!=null){
-        if (user._id==req.userId)
+      Role.find(
         {
-          next();
-          return
+          _id: { $in: user.roles }
+        },
+        (err, roles) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+          for (let i = 0; i < roles.length; i++) {
+            if (roles[i].name === "patient") {
+              next();
+              return;
+            }
+          }
+          res.status(403).send({ message: "Require Patient Role!" });
+          return;
         }
-      }
-      
-      res.status(403).send({ message: "Require Patient Role!" });
-      return;
-      
+      );
     });
-      
-      
-    
   };
 const authJwt = {
   verifyToken,
