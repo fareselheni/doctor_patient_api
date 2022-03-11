@@ -5,7 +5,7 @@ const Gouvernorat = db.gouvernorat
 
 const listSpecialite=['cardio','test']
 const listRole=['admin','doctor','patient']
-const listGouvernorat=['Tunis','Bizerte','Ariana']
+const listGouvernorat=['Tunis','Bizerte','Ariana','Manouba','Ben Arous','Zaghouan','Nabeul','Jendouba','Béja','Kef','Seliana','Sousse','Monastir','Mahdia','Kairouan','Kasserine','Sidi Bouzid','Sfax','Gabes','Tataouin','Médenine','Gafsa','Tozeur','Kébili']
 addSpecialite = () => {
     Specialite.estimatedDocumentCount((err, count) => {
         if (!err && count === 0) {
