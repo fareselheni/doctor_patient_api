@@ -2,6 +2,7 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
+const Specialite = db.specialite
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 exports.signup = (req, res) => {
@@ -9,17 +10,36 @@ exports.signup = (req, res) => {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
-    adresse: req.body.adresse,
+    // adresse: req.body.adresse,
     phone_number: req.body.phone_number,
     gender: req.body.gender,
     password: bcrypt.hashSync(req.body.password, 8),
-    // roles:["admin"]
+    gouvernorat:[req.body.gouvernorat]
   });
   user.save((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
+
+    
+    if (req.body.specialites) {
+      Specialite.find(
+        {
+          name: { $in: req.body.specialites }
+        },
+        (err, sp) => {
+          if (err) {
+            res.status(500).send({ messagefind: err });
+            return;
+          }
+          
+          user.specialites = sp.map(spec => spec._id);
+          console.log('sp',user)
+        }
+      );
+    }
+
     if (req.body.roles) {
       Role.find(
         {
@@ -31,6 +51,7 @@ exports.signup = (req, res) => {
             return;
           }
           user.roles = roles.map(role => role._id);
+          console.log('rp',user)
           user.save(err => {
             if (err) {
               res.status(500).send({ message: err });
@@ -40,22 +61,8 @@ exports.signup = (req, res) => {
           });
         }
       );
-    } else {
-      Role.findOne({ name: "user" }, (err, role) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-        user.roles = [role._id];
-        user.save(err => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-          res.send({ message: "User was registered successfully!" });
-        });
-      });
     }
+
   });
 };
 exports.signin = (req, res) => {

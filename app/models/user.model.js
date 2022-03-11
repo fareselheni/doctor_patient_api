@@ -20,6 +20,12 @@ const User = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Specialite"
       }
+    ],
+    gouvernorat: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Gouvernorat"
+      }
     ]
   })
 );
