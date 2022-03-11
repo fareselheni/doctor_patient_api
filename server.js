@@ -21,6 +21,7 @@ const db = require("./app/models");
 const dbs = require("./app/db/Seed")
 const spec = dbs.addSpecialite
 const role = dbs.addRole
+const gouvernorat = dbs.addGouvernorat
 
 
 db.mongoose
@@ -32,6 +33,7 @@ db.mongoose
     console.log("Successfully connect to MongoDB.");
     role();
     spec();
+    gouvernorat()
   })
   .catch(err => {
     console.error("Connection error", err);
