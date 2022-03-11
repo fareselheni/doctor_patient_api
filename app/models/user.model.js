@@ -14,6 +14,12 @@ const User = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
       }
+    ],
+    specialites: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Specialite"
+      }
     ]
   })
 );
