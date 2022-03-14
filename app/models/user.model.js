@@ -9,24 +9,26 @@ const User = mongoose.model(
     adresse: String,
     password: String,
     gender: String,
+    gouvernorat:String,
+    specialite:String,
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
       }
     ],
-    specialites: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Specialite"
-      }
-    ],
-    gouvernorat: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Gouvernorat"
-      }
-    ]
+    // specialites: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Specialite"
+    //   }
+    // ],
+    // gouvernorats: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Gouvernorat"
+    //   }
+    // ]
   })
 );
 module.exports = User;

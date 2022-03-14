@@ -14,7 +14,8 @@ exports.signup = (req, res) => {
     phone_number: req.body.phone_number,
     gender: req.body.gender,
     password: bcrypt.hashSync(req.body.password, 8),
-    gouvernorat:[req.body.gouvernorat]
+    gouvernorat:req.body.gouvernorat,
+    specialite:req.body.specialite
   });
   user.save((err, user) => {
     if (err) {
@@ -23,22 +24,22 @@ exports.signup = (req, res) => {
     }
 
     
-    if (req.body.specialites) {
-      Specialite.find(
-        {
-          name: { $in: req.body.specialites }
-        },
-        (err, sp) => {
-          if (err) {
-            res.status(500).send({ messagefind: err });
-            return;
-          }
+    // if (req.body.specialites) {
+    //   Specialite.find(
+    //     {
+    //       name: { $in: req.body.specialites }
+    //     },
+    //     (err, sp) => {
+    //       if (err) {
+    //         res.status(500).send({ messagefind: err });
+    //         return;
+    //       }
           
-          user.specialites = sp.map(spec => spec._id);
-          console.log('sp',user)
-        }
-      );
-    }
+    //       user.specialites = sp.map(spec => spec._id);
+    //       console.log('sp',user)
+    //     }
+    //   );
+    // }
 
     if (req.body.roles) {
       Role.find(
