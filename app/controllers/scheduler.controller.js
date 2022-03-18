@@ -3,9 +3,9 @@ const User = db.user;
 const Scheduler = db.scheduler;
 const Specialite = db.specialite
 const Gouvernorat = db.specialite
-exports.getAllUsers =async (req, res) => {
+exports.getAllEvents =async (req, res) => {
   try {
-        await User.find(
+        await Scheduler.find(
           {
           },
           (err, users) => {
@@ -20,33 +20,23 @@ exports.getAllUsers =async (req, res) => {
   }
     
 };
-exports.getAllGouvernorats =async (req, res) => {
-  // const users =await User.find()
-  // return users
 
-  await Gouvernorat.find(
-      {
-      },
-      (err, gouvernorats) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-          res.send({ allgouvernroats:  gouvernorats });
-        });
+exports.addEvent = (req, res) => {
+  const event = new Scheduler({
+    start_date: req.body.start_date,
+    end_date: req.body.end_date,
+    text: req.body.text,
+    user_id: req.body.user_id,
+    doctor_id: req.body.doctor_id,
+  });
+  event.save((err, doctor) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return ;
+      
+    }
+    res.send({ message: "event was added successfully!" });
+  });
+  
 };
-exports.getAllspecialites =async (req, res) => {
-  // const users =await User.find()
-  // return users
 
-  await Specialite.find(
-      {
-      },
-      (err, specialites) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-          res.send({ allspecialites:  specialites });
-        });
-};
