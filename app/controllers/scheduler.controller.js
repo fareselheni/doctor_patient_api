@@ -1,8 +1,8 @@
 const db = require("../models");
 const User = db.user;
-const Role = db.role;
+const Scheduler = db.scheduler;
 const Specialite = db.specialite
-const Gouvernorat = db.gouvernorat
+const Gouvernorat = db.specialite
 exports.getAllUsers =async (req, res) => {
   try {
         await User.find(
@@ -32,8 +32,8 @@ exports.getAllGouvernorats =async (req, res) => {
           res.status(500).send({ message: err });
           return;
         }
-          res.send({ allgouvernorats:  gouvernorats });
-        }).clone();
+          res.send({ allgouvernroats:  gouvernorats });
+        });
 };
 exports.getAllspecialites =async (req, res) => {
   // const users =await User.find()
@@ -48,5 +48,5 @@ exports.getAllspecialites =async (req, res) => {
           return;
         }
           res.send({ allspecialites:  specialites });
-        }).clone();
+        });
 };
