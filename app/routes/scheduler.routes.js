@@ -13,4 +13,12 @@ module.exports = function(app) {
     "/api/scheduler/newevent",
     controller.addEvent
   );
+  app.put(
+    "/api/scheduler/updateevent",
+    controller.updateEvent
+  );
+  app.delete(
+    "/api/scheduler/deleteevent",
+    controller.deleteEvent
+  );
 };

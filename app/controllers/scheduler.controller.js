@@ -8,12 +8,12 @@ exports.getAllEvents =async (req, res) => {
         await Scheduler.find(
           {
           },
-          (err, users) => {
+          (err, events) => {
             if (err) {
               res.status(500).send({ message: err });
               return;
             }
-              res.send({ allusers: users });
+              res.send({ allevents: events });
             }).clone();
   } catch (error) {
       console.log(error)
@@ -23,6 +23,7 @@ exports.getAllEvents =async (req, res) => {
 
 exports.addEvent = (req, res) => {
   const event = new Scheduler({
+    id: req.body.id,
     start_date: req.body.start_date,
     end_date: req.body.end_date,
     text: req.body.text,
@@ -37,6 +38,39 @@ exports.addEvent = (req, res) => {
     }
     res.send({ message: "event was added successfully!" });
   });
+  
+};
+exports.updateEvent =(req, res) => {
+  Scheduler.find({"_id":req.body._id}
+  ,{"text": req.body.text,
+  "start_date": req.body.start_date,
+  "end_date": req.body.end_date
+  }
+  , function(err, result){
+
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+
+}).clone();
+
+  
+};
+exports.deleteEvent = (req, res) => {
+  Scheduler.findByIdAndDelete({"_id":req.body._id}
+  , function(err, result){
+
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+
+})
   
 };
 
