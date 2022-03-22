@@ -18,7 +18,7 @@ module.exports = function(app) {
     controller.updateEvent
   );
   app.delete(
-    "/api/scheduler/deleteevent",
+    "/api/scheduler/deleteevent/:id",
     controller.deleteEvent
   );
 };

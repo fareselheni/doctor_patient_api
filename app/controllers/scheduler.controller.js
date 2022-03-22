@@ -60,7 +60,9 @@ exports.updateEvent =(req, res) => {
   
 };
 exports.deleteEvent = (req, res) => {
-  Scheduler.findByIdAndDelete({"_id":req.body._id}
+  id=req.params.id
+  console.log("id",id)
+  Scheduler.findByIdAndDelete({"_id":id}
   , function(err, result){
 
     if(err){
