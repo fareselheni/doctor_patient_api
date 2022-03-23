@@ -41,7 +41,9 @@ exports.addEvent = (req, res) => {
   
 };
 exports.updateEvent =(req, res) => {
-  Scheduler.find({"_id":req.body._id}
+  id=req.params.id
+  console.log("id",req.body)
+  Scheduler.findByIdAndUpdate({"_id":id}
   ,{"text": req.body.text,
   "start_date": req.body.start_date,
   "end_date": req.body.end_date
@@ -55,7 +57,7 @@ exports.updateEvent =(req, res) => {
         res.send(result)
     }
 
-}).clone();
+});
 
   
 };
