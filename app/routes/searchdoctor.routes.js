@@ -9,5 +9,6 @@ module.exports = function(app) {
     next();
   });
   app.get("/api/searchdoctor/all", controller.getAllDoctors);
+  app.get("/api/searchdoctor/filtre", controller.getDoctorsByFiltre);
 
 };
