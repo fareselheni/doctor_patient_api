@@ -27,7 +27,7 @@ exports.getAllDoctors =async (req, res) => {
   exports.getDoctorsByFiltre =async (req, res) => {
     try {
           const roleId = await Role.findOne({name:"doctor"}).select('_id').clone()
-          if(req.body.specialite && req.body.gouvernorat){
+          if(req.query.specialite && req.query.gouvernorat){
             await User.find(
                 {
                 },
@@ -38,10 +38,10 @@ exports.getAllDoctors =async (req, res) => {
                   }
                     res.send({ alldoctors: doctors });
                   }).where('roles').in([roleId])
-                  .where('gouvernorat').in([req.body.gouvernorat])
-                  .where('specialite').in([req.body.specialite]).clone()  
+                  .where('gouvernorat').in([req.query.gouvernorat])
+                  .where('specialite').in([req.query.specialite]).clone()  
           }
-          else if(req.body.specialite){
+          else if(req.query.specialite){
             await User.find(
                 {
                 },
@@ -52,9 +52,9 @@ exports.getAllDoctors =async (req, res) => {
                   }
                     res.send({ alldoctors: doctors });
                   }).where('roles').in([roleId])
-                  .where('specialite').in([req.body.specialite]).clone()
+                  .where('specialite').in([req.query.specialite]).clone()
           }
-          else if(req.body.gouvernorat){
+          else if(req.query.gouvernorat){
             await User.find(
                 {
                 },
@@ -65,7 +65,7 @@ exports.getAllDoctors =async (req, res) => {
                   }
                     res.send({ alldoctors: doctors });
                   }).where('roles').in([roleId])
-                  .where('gouvernorat').in([req.body.gouvernorat]).clone()
+                  .where('gouvernorat').in([req.query.gouvernorat]).clone()
           }
           else {
               res.send('empty')
