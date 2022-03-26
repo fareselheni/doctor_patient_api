@@ -15,7 +15,8 @@ exports.signup = (req, res) => {
     gender: req.body.gender,
     password: bcrypt.hashSync(req.body.password, 8),
     gouvernorat:req.body.gouvernorat,
-    specialite:req.body.specialite
+    specialite:req.body.specialite,
+    image:req.body.image
   });
   user.save((err, user) => {
     if (err) {
@@ -101,6 +102,7 @@ exports.signin = (req, res) => {
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
+        image: user.image,
         roles: authorities,
         accessToken: token
       });

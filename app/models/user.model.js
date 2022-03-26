@@ -11,6 +11,7 @@ const User = mongoose.model(
     gender: String,
     gouvernorat:String,
     specialite:String,
+    image:String,
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,
