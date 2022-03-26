@@ -4,6 +4,7 @@ const Scheduler = db.scheduler;
 const Specialite = db.specialite
 const Gouvernorat = db.specialite
 exports.getAllEvents =async (req, res) => {
+  const _id =req.query._id
   try {
         await Scheduler.find(
           {
@@ -14,7 +15,7 @@ exports.getAllEvents =async (req, res) => {
               return;
             }
               res.send({ allevents: events });
-            }).clone();
+            }).where('user_id').equals(_id).clone();
   } catch (error) {
       console.log(error)
   }
