@@ -7,5 +7,6 @@ db.role = require("./role.model");
 db.specialite = require("./specialite.model");
 db.gouvernorat = require("./gouvernorat.model");
 db.scheduler = require("./scheduler.model");
+db.timedispo = require("./timedispo.model");
 db.ROLES = ["doctor","patient", "admin"];
 module.exports = db;

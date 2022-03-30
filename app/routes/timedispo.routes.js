@@ -1,5 +1,5 @@
 const { authJwt } = require("../middlewares");
-const controller = require("../controllers/scheduler.controller");
+const controller = require("../controllers/timedispo.controller");
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(
@@ -8,18 +8,16 @@ module.exports = function(app) {
     );
     next();
   });
-  app.get("/api/scheduler/getall", controller.getAllEvents);
   app.post(
-    "/api/scheduler/newevent",
-    controller.addEvent
+    "/api/newtimedispo",
+    controller.addTimedispo
   );
   app.put(
-    "/api/scheduler/updateevent/:id",
+    "/api/updatetimedispo/:id",
     controller.updateEvent
   );
   app.delete(
-    "/api/scheduler/deleteevent/:id",
+    "/api/deletetimedispo/:id",
     controller.deleteEvent
   );
-  app.get("/api/scheduler/getstart", controller.checkCollision);
 };
