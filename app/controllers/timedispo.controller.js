@@ -1,18 +1,19 @@
 const db = require("../models");
+const { where } = require("../models/user.model");
 const Timedispo = db.timedispo;
 exports.getAllTimedispo =async (req, res) => {
-  const _id =req.query._id
+  // const _id =req.query._id
   try {
         await Timedispo.find(
           {
           },
-          (err, times) => {
+          (err, result) => {
             if (err) {
               res.status(500).send({ message: err });
               return;
             }
-              res.send({ alltimes: times });
-            }).where('doctor_id').equals(_id).clone();
+              res.send(result);
+            }).clone();
   } catch (error) {
       console.log(error)
   }
@@ -70,6 +71,23 @@ exports.deleteEvent = (req, res) => {
     }
 
 })
+  
+};
+exports.getDoctorTimeDispo = (req, res) => {
+  _id=req.params.id
+  start_date=req.params.start_date
+  console.log("id",_id)
+  Timedispo.find({ "start_date": { "$regex": start_date, "$options": "i" } }
+  , function(err, result){
+
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send({tdispo: result})
+    }
+
+}).where('doctor_id').equals(_id).clone()
   
 };
 

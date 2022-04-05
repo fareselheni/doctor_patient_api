@@ -8,6 +8,14 @@ module.exports = function(app) {
     );
     next();
   });
+  app.get(
+    "/api/timedispo/doctor/:id/:start_date",
+    controller.getDoctorTimeDispo
+  );
+  app.get(
+    "/api/timedispo/all",
+    controller.getAllTimedispo
+  );
   app.post(
     "/api/newtimedispo",
     controller.addTimedispo
