@@ -9,6 +9,7 @@ module.exports = function(app) {
     next();
   });
   app.get("/api/model/allusers", controller.getAllUsers);
+  app.get("/api/model/getDoctorById/:id", controller.getUserbyId);
   app.get("/api/model/allspecialite", controller.getAllspecialites);
   app.get("/api/model/allgouvernorats", controller.getAllGouvernorats);
 //   app.get("/api/test/doctor", [authJwt.verifyToken, authJwt.isDoctor],

@@ -52,6 +52,7 @@ require("./app/routes/model.routes")(app);
 require("./app/routes/scheduler.routes")(app);
 require("./app/routes/searchdoctor.routes")(app);
 require("./app/routes/timedispo.routes")(app);
+require("./app/routes/pre_appointment.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

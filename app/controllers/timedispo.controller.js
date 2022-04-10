@@ -76,7 +76,6 @@ exports.deleteEvent = (req, res) => {
 exports.getDoctorTimeDispo = (req, res) => {
   _id=req.params.id
   start_date=req.params.start_date
-  console.log("id",_id)
   Timedispo.find({ "start_date": { "$regex": start_date, "$options": "i" } }
   , function(err, result){
 

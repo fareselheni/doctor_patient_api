@@ -20,6 +20,24 @@ exports.getAllUsers =async (req, res) => {
   }
     
 };
+exports.getUserbyId =async (req, res) => {
+  const _id =req.params.id
+  try {
+        await User.find(
+          {
+          },
+          (err, user) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send(user);
+            }).where('_id').equals(_id).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
 exports.getAllGouvernorats =async (req, res) => {
   // const users =await User.find()
   // return users

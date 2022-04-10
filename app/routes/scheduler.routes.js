@@ -20,6 +20,4 @@ module.exports = function(app) {
   app.delete(
     "/api/scheduler/deleteevent/:id",
     controller.deleteEvent
-  );
-  app.get("/api/scheduler/getstart", controller.checkCollision);
-};
+  );};

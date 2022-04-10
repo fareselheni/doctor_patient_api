@@ -78,26 +78,4 @@ exports.deleteEvent = (req, res) => {
 })
   
 };
-exports.checkCollision =async  (req,res) => {
-  table = [];
-  const z =await Scheduler.find({}
-  , function(err, result){
-
-    if(err){
-        res.send(err)
-    }
-    else{
-        res.send(result)
-        return result
-    }
-
-}).select('start_date').clone()
-table= z
-for (let i=0;i<table.length;i++){
-  console.log(table[i].start_date.split(/[T,]+/))
-}
-
-
-
-};
 
