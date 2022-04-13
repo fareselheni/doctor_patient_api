@@ -1,6 +1,7 @@
 const db = require("../models");
 var nodemailer = require("nodemailer");
 const Pre_appointment = db.pre_appointment;
+const timedispo = db.timedispo;
 /*
 	Here we are configuring our SMTP Server details.
 	STMP is mail server which is responsible for sending and recieving email.
@@ -42,31 +43,32 @@ exports.send = (req, res) => {
 });
 };
 
-exports.verify = (req, res) => {
-
-        console.log("req.query.id" , req.query.id)
-        console.log("_id" , _id)
-        console.log("user_id" , user_id)
-        console.log("event" , event[0].start_date)
+exports.verify =async (req, res) => {
+        var eventparsed  = JSON.parse(event);
+        console.log("parsed" , eventparsed)
+        const checkDup = await timedispo.findOne({ _id: eventparsed._id });
         if(req.query.id==_id)
         {
-            // console.log("email is verified");
+            console.log("email is verified");
             // res.end("<h1>Email "+mailOptions.to+" is been Successfully verified");
-            // const PreApp = new Pre_appointment({
-            //     text: "testtest",
-            //     start_date: event.start_date,
-            //     end_date: event.end_date,
-            //     user_id: user_id,
-            //     doctor_id: event.doctor_id,
-            //   });
-            //   PreApp.save((err, doctor) => {
-            //     if (err) {
-            //       res.status(500).send({ message: err });
-            //       return ;
-                  
-            //     }
-            //     res.send({ message: "PreApp was added successfully!" });
-            //   });
+            
+            if (checkDup){
+                Pre_appointment.create({
+                    text: "testtest",
+                    start_date: eventparsed.start_date,
+                    end_date: eventparsed.end_date,
+                    user_id: user_id,
+                    doctor_id: eventparsed.doctor_id, 
+                    }, function (err, small) {
+                    if (err) return handleError(err);
+                    // saved!
+                  });
+                timedispo.deleteOne({ _id: eventparsed._id }, function (err) {
+                    if (err) return handleError(err);
+                    // deleted at most one tank document
+                  });  
+            }
+            
         }
         else
         {
