@@ -44,7 +44,6 @@ exports.addPreApp = (req, res) => {
     text: req.body.text,
     start_date: req.body.start_date,
     end_date: req.body.end_date,
-    text: req.body.text,
     user_id: req.body.user_id,
     doctor_id: req.body.doctor_id,
   });
