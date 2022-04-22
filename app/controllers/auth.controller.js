@@ -6,6 +6,7 @@ const Specialite = db.specialite
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 exports.signup = (req, res) => {
+  console.log(req.body)
   const user = new User({
     firstname: req.body.firstname,
     lastname: req.body.lastname,

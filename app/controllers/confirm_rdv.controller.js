@@ -37,14 +37,14 @@ exports.send = (req, res) => {
         	console.log(error);
 		res.end("error");
 	 }else{
-        	console.log("Message sent: " + response.message);
+        	// console.log("Message sent: " + response.message);
 		res.end("sent");
     	 }
-});
+})
 };
 
 exports.verify =async (req, res) => {
-        var eventparsed  = JSON.parse(event);
+        var eventparsed  = JSON.parse(event)
         console.log("parsed" , eventparsed)
         const checkDup = await timedispo.findOne({ _id: eventparsed._id });
         if(req.query.id==_id)

@@ -16,6 +16,59 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+//SOCKET.io BEGIN
+const httpServer = require('http').createServer(app);
+const io = require("socket.io")(httpServer, {
+  cors: {
+    origin: "http://localhost:8080",
+  },
+});
+
+io.use((socket, next) => {
+  const username = socket.handshake.auth.username;
+  if (!username) {
+    return next(new Error("invalid username"));
+  }
+  socket.username = username;
+  next();
+});
+
+io.on("connection", (socket) => {
+  // fetch existing users
+  const users = [];
+  for (let [id, socket] of io.of("/").sockets) {
+    users.push({
+      userID: id,
+      username: socket.username,
+    });
+  }
+  socket.emit("users", users);
+
+  // notify existing users
+  socket.broadcast.emit("user connected", {
+    userID: socket.id,
+    username: socket.username,
+  });
+
+  // forward the private message to the right recipient
+  socket.on("private message", ({ content, to }) => {
+    socket.to(to).emit("private message", {
+      content,
+      from: socket.id,
+    });
+  });
+  socket.on('getDoctorId', (msg) => {
+    console.log('message: ' + msg);
+    io.sockets.emit('notify',msg)
+  });
+
+  // notify users upon disconnection
+  socket.on("disconnect", () => {
+    socket.broadcast.emit("user disconnected", socket.id);
+  });
+});
+//SOCKET.io END
+
 const db = require("./app/models");
 // const Role = db.role;
 const dbs = require("./app/db/Seed")
@@ -42,8 +95,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  // res.json({ message: "Welcome to Wevioo application." });
-  res.sendfile('index.html');
+  res.json({ message: "Welcome to Wevioo application." });
 });
 
 // routes
@@ -55,10 +107,10 @@ require("./app/routes/searchdoctor.routes")(app);
 require("./app/routes/timedispo.routes")(app);
 require("./app/routes/pre_appointment.routes")(app);
 require("./app/routes/confirm_rdv.routes")(app);
-
+require("./app/routes/notification.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
