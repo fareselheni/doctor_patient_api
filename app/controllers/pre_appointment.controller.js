@@ -57,31 +57,30 @@ exports.addPreApp = (req, res) => {
   });
   
 };
-exports.updateEvent =(req, res) => {
-  id=req.params.id
-  console.log("id",req.body)
-  Scheduler.findByIdAndUpdate({"_id":id}
-  ,{"text": req.body.text,
-  "start_date": req.body.start_date,
-  "end_date": req.body.end_date
-  }
-  , function(err, result){
+// exports.updateEvent =(req, res) => {
+//   id=req.params.id
+//   console.log("id",req.body)
+//   Scheduler.findByIdAndUpdate({"_id":id}
+//   ,{"text": req.body.text,
+//   "start_date": req.body.start_date,
+//   "end_date": req.body.end_date
+//   }
+//   , function(err, result){
 
-    if(err){
-        res.send(err)
-    }
-    else{
-        res.send(result)
-    }
+//     if(err){
+//         res.send(err)
+//     }
+//     else{
+//         res.send(result)
+//     }
 
-});
+// });
 
   
-};
+// };
 exports.deleteEvent = (req, res) => {
   id=req.params.id
-  console.log("id",id)
-  Scheduler.findByIdAndDelete({"_id":id}
+  Pre_appointment.findByIdAndDelete({"_id":id}
   , function(err, result){
 
     if(err){
@@ -94,26 +93,26 @@ exports.deleteEvent = (req, res) => {
 })
   
 };
-exports.checkCollision =async  (req,res) => {
-  table = [];
-  const z =await Scheduler.find({}
-  , function(err, result){
+// exports.checkCollision =async  (req,res) => {
+//   table = [];
+//   const z =await Scheduler.find({}
+//   , function(err, result){
 
-    if(err){
-        res.send(err)
-    }
-    else{
-        res.send(result)
-        return result
-    }
+//     if(err){
+//         res.send(err)
+//     }
+//     else{
+//         res.send(result)
+//         return result
+//     }
 
-}).select('start_date').clone()
-table= z
-for (let i=0;i<table.length;i++){
-  console.log(table[i].start_date.split(/[T,]+/))
-}
+// }).select('start_date').clone()
+// table= z
+// for (let i=0;i<table.length;i++){
+//   console.log(table[i].start_date.split(/[T,]+/))
+// }
 
 
 
-};
+// };
 

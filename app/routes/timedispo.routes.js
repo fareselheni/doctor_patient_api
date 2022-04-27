@@ -16,6 +16,10 @@ module.exports = function(app) {
     "/api/timedispo/all",
     controller.getAllTimedispo
   );
+  app.get(
+    "/api/timedispo/doctor/all",
+    controller.getdoctorAllTimedispo
+  );
   app.post(
     "/api/newtimedispo",
     controller.addTimedispo

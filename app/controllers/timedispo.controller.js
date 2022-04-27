@@ -59,7 +59,6 @@ exports.updateEvent =(req, res) => {
 };
 exports.deleteEvent = (req, res) => {
   id=req.params.id
-  console.log("id",id)
   Timedispo.findByIdAndDelete({"_id":id}
   , function(err, result){
 
@@ -88,5 +87,24 @@ exports.getDoctorTimeDispo = (req, res) => {
 
 }).where('doctor_id').equals(_id).clone()
   
+};
+exports.getdoctorAllTimedispo =async (req, res) => {
+  _id=req.query._id
+  console.log('id', _id)
+  try {
+        await Timedispo.find(
+          {
+          },
+          (err, result) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({tdispo: result});
+            }).where('doctor_id').equals(_id).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
 };
 

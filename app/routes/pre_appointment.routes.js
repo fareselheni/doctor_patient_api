@@ -13,6 +13,10 @@ module.exports = function(app) {
     "/api/pre_app/new",
     controller.addPreApp
   );
+  app.delete(
+    "/api/pre_app/delete/:id",
+    controller.deleteEvent
+  );
   // app.put(
   //   "/api/scheduler/updateevent/:id",
   //   controller.updateEvent
