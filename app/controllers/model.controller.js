@@ -38,6 +38,14 @@ exports.getUserbyId =async (req, res) => {
   }
     
 };
+exports.getUserByIdWithReturn =async (id) =>{
+  try {
+      const user = await User.findById(id).exec();
+      return user
+  } catch (error) {
+      console.log(error)
+  }
+};
 exports.getAllGouvernorats =async (req, res) => {
   // const users =await User.find()
   // return users

@@ -21,6 +21,26 @@ exports.getAllEvents =async (req, res) => {
   }
     
 };
+exports.getAllSchedulerWithReturn =async (req, res) => {
+  try {
+        const events = await Scheduler.find(
+          {
+          },
+          (err, events) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+            //   res.send({ allevents: events });
+            return events
+            }).clone();
+        return events    
+  } catch (error) {
+      console.log(error)
+  }
+
+    
+};
 
 exports.addEvent = (req, res) => {
   const event = new Scheduler({

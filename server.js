@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
+const meet_link_email = require("./app/controllers/meet_link_email.controller");
 
 const app = express();
 
@@ -51,12 +52,12 @@ io.on("connection", (socket) => {
   });
 
   // forward the private message to the right recipient
-  socket.on("private message", ({ content, to }) => {
-    socket.to(to).emit("private message", {
-      content,
-      from: socket.id,
-    });
-  });
+  // socket.on("private message", ({ content, to }) => {
+  //   socket.to(to).emit("private message", {
+  //     content,
+  //     from: socket.id,
+  //   });
+  // });
   socket.on('getDoctorId', (msg) => {
     console.log('message: ' + msg);
     io.sockets.emit('notify',msg)
@@ -97,6 +98,9 @@ db.mongoose
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Wevioo application." });
 });
+
+//meet_link_email
+meet_link_email.sendDailyEmails()
 
 // routes
 require("./app/routes/auth.routes")(app);
