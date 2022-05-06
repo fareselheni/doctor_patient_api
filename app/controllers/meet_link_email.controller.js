@@ -3,9 +3,7 @@ var nodemailer = require("nodemailer");
 const schedule = require('node-schedule');
 const SchedulerController = require('./scheduler.controller');
 const ModelController = require('./model.controller');
-const db = require("../models");
-const Scheduler = db.scheduler;
-const User = db.user;
+const create_room = require("./create_room.controller");
 
 /*
 	Here we are configuring our SMTP Server details.
@@ -23,8 +21,8 @@ var rand,mailOptions,host,link;
 
 
 exports.sendDailyEmails =async () => {
- 
-        const job = schedule.scheduleJob("49 3 * * *",async function(){
+        
+        const job = schedule.scheduleJob("31 11 * * *",async function(){
 
           const events = await SchedulerController.getAllSchedulerWithReturn()
           for(let i=0; i< events.length; i++){
@@ -32,10 +30,12 @@ exports.sendDailyEmails =async () => {
             let patient = await ModelController.getUserByIdWithReturn(events[i]['user_id'])
             start_date= events[i]['start_date']
             if(Date.parse(start_date).isToday()){
+              const room_link =await create_room.createRoom()
+              console.log(room_link.url)
               mailOptions={
                 to : doctor['email']+','+patient['email'],
-                subject : "Your Meeting Link",
-                html : "Hello,<br> Please Click on the link to verify your appointment.<br><a href=>Click here to verify</a>"	
+                subject : "Lien de votre réunion",
+                html : "Bonjour,<br> veuillez utiliser ce lien pour accéder a votre réunion.<br>"+room_link.url+""	
               }
               smtpTransport.sendMail(mailOptions, function(error, response){
                   if(error){

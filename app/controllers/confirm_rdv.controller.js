@@ -1,5 +1,6 @@
 const db = require("../models");
 var nodemailer = require("nodemailer");
+const ModelController = require('./model.controller');
 const Pre_appointment = db.pre_appointment;
 const timedispo = db.timedispo;
 /*
@@ -44,8 +45,9 @@ exports.send = (req, res) => {
 };
 
 exports.verify =async (req, res) => {
+        let patient = await ModelController.getUserByIdWithReturn(user_id)
         var eventparsed  = JSON.parse(event)
-        console.log("parsed" , eventparsed)
+        // console.log("parsed" , eventparsed)
         const checkDup = await timedispo.findOne({ _id: eventparsed._id });
         if(req.query.id==_id)
         {
@@ -54,7 +56,7 @@ exports.verify =async (req, res) => {
             
             if (checkDup){
                 Pre_appointment.create({
-                    text: "testtest",
+                    text: "Rendez-vous avec "+patient.firstname+" " +patient.lastname,
                     start_date: eventparsed.start_date,
                     end_date: eventparsed.end_date,
                     user_id: user_id,
