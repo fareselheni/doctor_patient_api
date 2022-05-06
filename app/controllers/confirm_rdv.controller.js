@@ -15,7 +15,7 @@ var smtpTransport = nodemailer.createTransport({
     }
 });
 var rand,mailOptions,host,link;
-var _id,event,user_id;
+var _id,event,user_id,typeRDV;
 /*------------------SMTP Over-----------------------------*/
 
 exports.send = (req, res) => {
@@ -25,6 +25,7 @@ exports.send = (req, res) => {
     _id= req.query._id
     event= req.query.event
     user_id= req.query.user_id
+    typeRDV= req.query.typeRDV
 	// link="http://"+req.get('host')+"/verify?id="+rand;
     link="http://localhost:8080"+"/mesRendezVous?id="+_id;
 	mailOptions={
@@ -47,7 +48,8 @@ exports.send = (req, res) => {
 exports.verify =async (req, res) => {
         let patient = await ModelController.getUserByIdWithReturn(user_id)
         var eventparsed  = JSON.parse(event)
-        // console.log("parsed" , eventparsed)
+        console.log("parsed" , eventparsed)
+        console.log("typeRDV" , typeRDV)
         const checkDup = await timedispo.findOne({ _id: eventparsed._id });
         if(req.query.id==_id)
         {
@@ -61,6 +63,7 @@ exports.verify =async (req, res) => {
                     end_date: eventparsed.end_date,
                     user_id: user_id,
                     doctor_id: eventparsed.doctor_id, 
+                    typeRDV: typeRDV,
                     }, function (err, small) {
                     if (err) return handleError(err);
                     // saved!

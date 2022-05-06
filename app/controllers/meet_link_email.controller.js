@@ -22,14 +22,15 @@ var rand,mailOptions,host,link;
 
 exports.sendDailyEmails =async () => {
         
-        const job = schedule.scheduleJob("31 11 * * *",async function(){
+        const job = schedule.scheduleJob("32 11 * * *",async function(){
 
           const events = await SchedulerController.getAllSchedulerWithReturn()
           for(let i=0; i< events.length; i++){
             let doctor = await ModelController.getUserByIdWithReturn(events[i]['doctor_id'])
             let patient = await ModelController.getUserByIdWithReturn(events[i]['user_id'])
             start_date= events[i]['start_date']
-            if(Date.parse(start_date).isToday()){
+            // console.log("events[i]['typeRDV']",events[i]['typeRDV'])
+            if((Date.parse(start_date).isToday())&&(events[i]['typeRDV']=='visio')){
               const room_link =await create_room.createRoom()
               console.log(room_link.url)
               mailOptions={

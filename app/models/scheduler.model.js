@@ -7,7 +7,8 @@ const Scheduler = mongoose.model(
     end_date: String,
     text: String,
     user_id: String,
-    doctor_id: String
+    doctor_id: String,
+    typeRDV: String
   })
 );
 module.exports = Scheduler;

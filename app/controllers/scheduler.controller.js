@@ -50,6 +50,7 @@ exports.addEvent = (req, res) => {
     text: req.body.text,
     user_id: req.body.user_id,
     doctor_id: req.body.doctor_id,
+    typeRDV: req.body.typeRDV
   });
   event.save((err, doctor) => {
     if (err) {
