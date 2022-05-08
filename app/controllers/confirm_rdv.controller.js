@@ -46,10 +46,13 @@ exports.send = (req, res) => {
 };
 
 exports.verify =async (req, res) => {
-        let patient = await ModelController.getUserByIdWithReturn(user_id)
+    
+        // let patient = await ModelController.getUserByIdWithReturn(user_id)
         var eventparsed  = JSON.parse(event)
-        console.log("parsed" , eventparsed)
-        console.log("typeRDV" , typeRDV)
+        let doctor = await ModelController.getUserByIdWithReturn(eventparsed.doctor_id)
+        let patient = await ModelController.getUserByIdWithReturn(user_id)
+        let doctor_name = doctor.firstname + " " + doctor.lastname
+        let patient_name = patient.firstname + " " + patient.lastname
         const checkDup = await timedispo.findOne({ _id: eventparsed._id });
         if(req.query.id==_id)
         {
@@ -64,6 +67,8 @@ exports.verify =async (req, res) => {
                     user_id: user_id,
                     doctor_id: eventparsed.doctor_id, 
                     typeRDV: typeRDV,
+                    user_name: patient_name,
+                    doctor_name: doctor_name,
                     }, function (err, small) {
                     if (err) return handleError(err);
                     // saved!

@@ -7,6 +7,8 @@ const Pre_appointment = mongoose.model(
     end_date: String,
     user_id: String,
     doctor_id: String,
+    user_name: String,
+    doctor_name: String,
     typeRDV: { type: String, default: 'visio' },
     status: { type: String, default: 'en attente' }
   })

@@ -1,4 +1,5 @@
 const db = require("../models");
+const ModelController = require('./model.controller');
 const Pre_appointment = db.pre_appointment;
 exports.UsergetAllPreApp =async (req, res) => {
   const _id =req.query._id
@@ -39,13 +40,19 @@ exports.DoctorgetAllPreApp =async (req, res) => {
     
 };
 
-exports.addPreApp = (req, res) => {
+exports.addPreApp =async (req, res) => {
+  let doctor = await ModelController.getUserByIdWithReturn(req.body.doctor_id)
+  let patient = await ModelController.getUserByIdWithReturn(req.body.user_id)
+  let doctor_name = doctor.firstname + " " + doctor.lastname
+  let patient_name = patient.firstname + " " + patient.lastname
   const PreApp = new Pre_appointment({
     text: req.body.text,
     start_date: req.body.start_date,
     end_date: req.body.end_date,
     user_id: req.body.user_id,
     doctor_id: req.body.doctor_id,
+    user_name: patient_name,
+    doctor_name: doctor_name,
   });
   PreApp.save((err, doctor) => {
     if (err) {
