@@ -121,7 +121,17 @@ exports.getAllDoctors =async (req, res) => {
                   // .where('firstname').elemMatch(req.query.name).clone()
           }
           else {
-              res.send('empty')
+              // res.send('empty')
+              await User.find(
+                {
+                },
+                (err, doctors) => {
+                  if (err) {
+                    res.status(500).send({ message: err });
+                    return;
+                  }
+                    res.send({ alldoctors: doctors });
+                  }).where('roles').in([roleId]).clone()
           }
     } catch (error) {
         console.log(error)
