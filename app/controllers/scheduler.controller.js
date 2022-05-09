@@ -15,7 +15,7 @@ exports.getAllEvents =async (req, res) => {
               return;
             }
               res.send({ allevents: events });
-            }).where('user_id').equals(_id).clone();
+            }).where('doctor_id').equals(_id).clone();
   } catch (error) {
       console.log(error)
   }
