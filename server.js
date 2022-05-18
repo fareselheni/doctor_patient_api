@@ -62,6 +62,10 @@ io.on("connection", (socket) => {
     console.log('message: ' + msg);
     io.sockets.emit('notify',msg)
   });
+  socket.on('getPatientId', (msg) => {
+    console.log('message: ' + msg);
+    io.sockets.emit('notifyPatient',msg)
+  });
 
   // notify users upon disconnection
   socket.on("disconnect", () => {
