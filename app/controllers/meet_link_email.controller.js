@@ -22,7 +22,7 @@ var rand,mailOptions,host,link;
 
 exports.sendDailyEmails =async () => {
         
-        const job = schedule.scheduleJob("56 11 * * *",async function(){
+        const job = schedule.scheduleJob("35 16 * * *",async function(){
 
           const events = await SchedulerController.getAllSchedulerWithReturn()
           for(let i=0; i< events.length; i++){

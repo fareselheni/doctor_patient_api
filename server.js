@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dbConfig = require("./app/config/db.config");
-const meet_link_email = require("./app/controllers/meet_link_email.controller");
+// const meet_link_email = require("./app/controllers/meet_link_email.controller");
 
 const app = express();
 
@@ -100,7 +100,7 @@ app.get("/", (req, res) => {
 });
 
 //meet_link_email
-meet_link_email.sendDailyEmails()
+// meet_link_email.sendDailyEmails()
 
 // routes
 require("./app/routes/auth.routes")(app);

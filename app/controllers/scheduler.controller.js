@@ -1,7 +1,26 @@
 const db = require("../models");
+var nodemailer = require("nodemailer");
 const User = db.user;
 const Scheduler = db.scheduler;
 const ModelController = require('./model.controller');
+const create_room = require("./create_room.controller");
+
+
+/*
+	Here we are configuring our SMTP Server details.
+	STMP is mail server which is responsible for sending and recieving email.
+*/
+var smtpTransport = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+      user: "servicedpnm@gmail.com",
+      pass: "azerty@12345"
+  }
+});
+var rand,mailOptions,host,link;
+// rand=Math.floor((Math.random() * 100) + 54);
+
+
 exports.getAllEvents =async (req, res) => {
   const _id =req.query._id
   try {
@@ -83,6 +102,25 @@ exports.addEvent = async (req, res) => {
     }
     res.send({ message: "event was added successfully!" });
   });
+  if(req.body.typeRDV=='visio'){
+    const room_link =await create_room.createRoom()
+    console.log(room_link.url)
+    mailOptions={
+      to : doctor['email']+','+patient['email'],
+      subject : "Lien de la réunion Dr."+doctor_name+" avec "+patient_name+"",
+      html : "Bonjour,<br> veuillez utiliser ce lien pour accéder a votre réunion.<br>"+room_link.url+""	
+    }
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
+      res.end("error");
+     }else{
+            // console.log("Message sent: " + response.message);
+      res.end("sent");
+         }
+    })
+    
+  }
   
 };
 exports.updateEvent =(req, res) => {
