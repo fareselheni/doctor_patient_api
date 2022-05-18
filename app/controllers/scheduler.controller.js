@@ -1,8 +1,7 @@
 const db = require("../models");
 const User = db.user;
 const Scheduler = db.scheduler;
-const Specialite = db.specialite
-const Gouvernorat = db.specialite
+const ModelController = require('./model.controller');
 exports.getAllEvents =async (req, res) => {
   const _id =req.query._id
   try {
@@ -16,6 +15,24 @@ exports.getAllEvents =async (req, res) => {
             }
               res.send({ allevents: events });
             }).where('doctor_id').equals(_id).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
+exports.patientAllConfirmedEvents =async (req, res) => {
+  const _id =req.query._id
+  try {
+        await Scheduler.find(
+          {
+          },
+          (err, events) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allevents: events });
+            }).where('user_id').equals(_id).clone();
   } catch (error) {
       console.log(error)
   }
@@ -42,7 +59,11 @@ exports.getAllSchedulerWithReturn =async (req, res) => {
     
 };
 
-exports.addEvent = (req, res) => {
+exports.addEvent = async (req, res) => {
+  let doctor = await ModelController.getUserByIdWithReturn(req.body.doctor_id)
+  let patient = await ModelController.getUserByIdWithReturn(req.body.user_id)
+  let doctor_name = doctor.firstname + " " + doctor.lastname
+  let patient_name = patient.firstname + " " + patient.lastname
   const event = new Scheduler({
     id: req.body.id,
     start_date: req.body.start_date,
@@ -50,7 +71,9 @@ exports.addEvent = (req, res) => {
     text: req.body.text,
     user_id: req.body.user_id,
     doctor_id: req.body.doctor_id,
-    typeRDV: req.body.typeRDV
+    typeRDV: req.body.typeRDV,
+    user_name: patient_name,
+    doctor_name: doctor_name
   });
   event.save((err, doctor) => {
     if (err) {

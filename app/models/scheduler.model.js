@@ -6,6 +6,8 @@ const schedulerSchema = new mongoose.Schema({
   text: String,
   user_id: String,
   doctor_id: String,
+  user_name: String,
+  doctor_name: String,
   typeRDV: String
 })
 schedulerSchema.set("timestamps",true);
