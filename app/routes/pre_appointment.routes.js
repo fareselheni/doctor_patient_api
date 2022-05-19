@@ -9,6 +9,7 @@ module.exports = function(app) {
   });
   app.get("/api/pre_app/user/getall", controller.UsergetAllPreApp);
   app.get("/api/pre_app/doctor/getall", controller.DoctorgetAllPreApp);
+  app.get("/api/pre_app/checkExistingPreApp", controller.CheckExistingPreApp);
   app.post(
     "/api/pre_app/new",
     controller.addPreApp

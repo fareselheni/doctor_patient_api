@@ -1,4 +1,5 @@
 const db = require("../models");
+const { where } = require("../models/user.model");
 const ModelController = require('./model.controller');
 const Pre_appointment = db.pre_appointment;
 exports.UsergetAllPreApp =async (req, res) => {
@@ -100,26 +101,26 @@ exports.deleteEvent = (req, res) => {
 })
   
 };
-// exports.checkCollision =async  (req,res) => {
-//   table = [];
-//   const z =await Scheduler.find({}
-//   , function(err, result){
 
-//     if(err){
-//         res.send(err)
-//     }
-//     else{
-//         res.send(result)
-//         return result
-//     }
-
-// }).select('start_date').clone()
-// table= z
-// for (let i=0;i<table.length;i++){
-//   console.log(table[i].start_date.split(/[T,]+/))
-// }
-
-
-
-// };
+exports.CheckExistingPreApp =async (req, res) => {
+  const _id =req.query._id
+  const user_id =req.query.user_id
+  try {
+        await Pre_appointment.find(
+          {
+          },
+          (err, events) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allpreApp: events.length });
+            }).where('doctor_id').equals(_id)
+            .where('user_id').equals(user_id).clone();
+            // 
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
 
