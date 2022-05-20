@@ -9,5 +9,6 @@ db.gouvernorat = require("./gouvernorat.model");
 db.scheduler = require("./scheduler.model");
 db.timedispo = require("./timedispo.model");
 db.pre_appointment = require("./pre_appointment.model")
+db.rating = require("./rating.model")
 db.ROLES = ["doctor","patient", "admin"];
 module.exports = db;
