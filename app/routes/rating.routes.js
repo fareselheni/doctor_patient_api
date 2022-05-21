@@ -9,5 +9,6 @@ module.exports = function(app) {
   });
   app.post("/api/rating/newRating", controller.addRating);
   app.get("/api/rating/doctorgetAll", controller.getDoctorAllRating);
+  app.get("/api/rating/getscore", controller.getDoctorscore);
 
 };

@@ -25,6 +25,36 @@ exports.addRating =async (req, res) => {
   
 };
 
+exports.getDoctorscore =async (req, res) => {
+    const doctor_id =req.query.doctor_id
+    var doctorScore
+    try {
+        var length = await Rating.countDocuments({doctor_id:doctor_id}, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var sum = await db.rating.aggregate([
+            { $match: { doctor_id: doctor_id } },
+            { $group: { _id: null, sum_score: { $sum: "$score" } } }
+        ])
+        if (length === 0) {
+            doctorScore = 0
+        } else {
+            doctorScore= sum[0]["sum_score"]/length
+        }
+        
+        res.json({score: doctorScore})
+
+
+    } catch (error) {
+        console.log(error)
+    }
+      
+  };
+
 exports.getDoctorAllRating =async (req, res) => {
     const doctor_id =req.query.doctor_id
     try {
