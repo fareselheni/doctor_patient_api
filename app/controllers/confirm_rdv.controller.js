@@ -30,8 +30,8 @@ exports.send = (req, res) => {
     link="http://localhost:8080"+"/mesRendezVous?id="+_id;
 	mailOptions={
 		to : req.query.to,
-		subject : "Please confirm your Email account",
-		html : "Hello,<br> Please Click on the link to verify your appointment.<br><a href="+link+">Click here to verify</a>"	
+		subject : "Veillez confirmer votre rendez-vous",
+		html : "Bonjour,<br>Veuillez cliquer sur le lien pour confimer votre rendez-vous.<br><a href="+link+">Cliquer ici pour verifier</a>"	
 	}
 	console.log(mailOptions);
 	smtpTransport.sendMail(mailOptions, function(error, response){
