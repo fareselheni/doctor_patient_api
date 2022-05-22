@@ -12,13 +12,14 @@ exports.pushNot =async (req, res) => {
     );
 
     const subscription = req.body.body;
+    const bodyNotification = req.body.bodyNotification;
     // console.log("subsciptttttt",JSON.parse(subscription))
 
     // Send 201 - resource created
     res.status(201).json({});
   
     // Create payload
-    const payload = JSON.stringify({ title: "Notification" });
+    const payload = JSON.stringify({ title: "Notification" , bodyNotification:bodyNotification });
   
     // Pass object into sendNotification
     webpush
