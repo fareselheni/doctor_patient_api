@@ -25,3 +25,41 @@ exports.addPrescription =async (req, res) => {
   });
   
 };
+
+exports.patientGetAllPerscriptions =async (req, res) => {
+    const _id =req.query._id
+    try {
+          await Prescription.find(
+            {
+            },
+            (err, events) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+                res.send({ allevents: events });
+              }).where('user_id').equals(_id).clone();
+    } catch (error) {
+        console.log(error)
+    }
+      
+  };
+ 
+  exports.doctorGetAllPerscriptions =async (req, res) => {
+    const _id =req.query._id
+    try {
+          await Prescription.find(
+            {
+            },
+            (err, events) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+                res.send({ allevents: events });
+              }).where('doctor_id').equals(_id).clone();
+    } catch (error) {
+        console.log(error)
+    }
+      
+  };  
