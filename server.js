@@ -117,6 +117,7 @@ require("./app/routes/pre_appointment.routes")(app);
 require("./app/routes/confirm_rdv.routes")(app);
 require("./app/routes/notification.routes")(app);
 require("./app/routes/rating.routes")(app);
+require("./app/routes/prescription.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
