@@ -10,5 +10,9 @@ module.exports = function(app) {
   app.post("/api/prescription/newPrescription", controller.addPrescription);
   app.get("/api/prescription/patient/getall", controller.patientGetAllPerscriptions);
   app.get("/api/prescription/doctor/getall", controller.doctorGetAllPerscriptions);
+  app.delete(
+    "/api/prescription/delete/:id",
+    controller.deleteEvent
+  );
 
 };

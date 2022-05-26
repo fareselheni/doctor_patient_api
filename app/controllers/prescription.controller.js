@@ -63,3 +63,19 @@ exports.patientGetAllPerscriptions =async (req, res) => {
     }
       
   };  
+
+  exports.deleteEvent = (req, res) => {
+    id=req.params.id
+    Prescription.findByIdAndDelete({"_id":id}
+    , function(err, result){
+  
+      if(err){
+          res.send(err)
+      }
+      else{
+          res.send(result)
+      }
+  
+  })
+    
+  };  
