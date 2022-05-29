@@ -1,5 +1,5 @@
+require("datejs");
 const db = require("../models");
-const { where } = require("../models/user.model");
 const Timedispo = db.timedispo;
 exports.getAllTimedispo =async (req, res) => {
   // const _id =req.query._id
@@ -22,8 +22,8 @@ exports.getAllTimedispo =async (req, res) => {
 
 exports.addTimedispo = (req, res) => {
   const time = new Timedispo({
-    start_date: req.body.start_date,
-    end_date: req.body.end_date,
+    start_date: Date.parse(req.body.start_date).toISOString(),
+    end_date: Date.parse(req.body.end_date).toISOString(),
     doctor_id: req.body.doctor_id,
   });
   time.save((err, doctor) => {

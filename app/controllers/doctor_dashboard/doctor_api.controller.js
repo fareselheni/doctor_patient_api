@@ -1,7 +1,5 @@
 require("datejs");
 const db = require("../../models");
-const ModelController = require('../model.controller');
-const Prescription = db.prescription;
 const Scheduler = db.scheduler;
   
   exports.CountThisweekAppointments =async (req, res) => {
@@ -288,6 +286,175 @@ const Scheduler = db.scheduler;
             thursday:thursday,
             friday:friday,
             saturday:saturday
+        })
+
+
+    } catch (error) {
+        console.log(error)
+    }
+      
+  };
+
+  exports.CountEveryMonthAppointments =async (req, res) => {
+    const doctor_id =req.query.doctor_id
+    try {
+        var january = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.january().addHours(2).toISOString() ,
+                $lt: Date.february().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var february = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.february().addHours(2).toISOString() ,
+                $lt: Date.march().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var march = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.march().addHours(2).toISOString() ,
+                $lt: Date.april().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var april = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.april().addHours(2).toISOString() ,
+                $lt: Date.may().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var may = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.may().addHours(2).toISOString() ,
+                $lt: Date.june().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var june = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.june().addHours(2).toISOString() ,
+                $lt: Date.july().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var july = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.july().addHours(2).toISOString() ,
+                $lt: Date.august().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var august = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.august().addHours(2).toISOString() ,
+                $lt: Date.september().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var september = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.september().addHours(2).toISOString() ,
+                $lt: Date.october().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var october = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.october().addHours(2).toISOString() ,
+                $lt: Date.november().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var november = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.november().addHours(2).toISOString() ,
+                $lt: Date.december().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        var december = await Scheduler.countDocuments({doctor_id:doctor_id
+            ,start_date: {
+                $gte:Date.december().addHours(2).toISOString() ,
+                $lt: Date.january().toISOString() ,
+            }
+        }, function (err, count) {
+            if (err){
+                console.log(err)
+            }else{
+                return count
+            }
+        }).clone();
+        
+        res.json({january:january,
+            february:february,
+            march:march,
+            april:april,
+            may:may,
+            june:june,
+            july:july,
+            august:august,
+            september:september,
+            october:october,
+            november:november,
+            december:december
         })
 
 

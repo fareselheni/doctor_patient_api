@@ -14,5 +14,6 @@ module.exports = function(app) {
   app.get("/api/dashboard/doctor/countMonthApp", controller.CountThisMonthAppointments);
   app.get("/api/dashboard/doctor/PourcentageMonthAppointments", controller.PourcentageMonthAppointments);
   app.get("/api/dashboard/doctor/CountEveryDayAppointments", controller.CountEveryDayAppointments);
+  app.get("/api/dashboard/doctor/CountEveryMonthAppointments", controller.CountEveryMonthAppointments);
 
 };
