@@ -8,6 +8,8 @@ module.exports = function(app) {
     next();
   });
   app.post("/subscribe", controller.pushNot);
+  app.post("/api/notification/addNotification", controller.addNotification);
+  app.get("/api/notification/getNotifications", controller.GetAllNotifications);
   // app.get("/*", (req, res) => {
   //   res.sendFile(path.resolve(__dirname, "public", "sw.js"));
   // });

@@ -1,4 +1,8 @@
 const webpush = require("web-push");
+const db = require("../models");
+const Notification = db.notification;
+const ModelController = require('./model.controller');
+
 exports.pushNot =async (req, res) => {
   try {
     const publicVapidKey =
@@ -26,6 +30,43 @@ exports.pushNot =async (req, res) => {
       .sendNotification(JSON.parse(subscription), payload)
       .catch(err => console.error(err));
         
+            // 
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
+
+exports.addNotification =async (req, res) => {
+  const notification = new Notification({
+    title: req.body.title,
+    body: req.body.body,
+    user_id: req.body.user_id,
+  });
+  notification.save((err, notification) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return ;
+      
+    }
+    res.send({ message: "Notification was added successfully!" });
+  });
+  
+};
+
+exports.GetAllNotifications =async (req, res) => {
+  const user_id =req.query.user_id
+  try {
+        await Notification.find(
+          {
+          },
+          (err, events) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allNotifications: events });
+            }).where('user_id').equals(user_id).clone();
             // 
   } catch (error) {
       console.log(error)
