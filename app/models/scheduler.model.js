@@ -8,7 +8,8 @@ const schedulerSchema = new mongoose.Schema({
   doctor_id: String,
   user_name: String,
   doctor_name: String,
-  typeRDV: String
+  typeRDV: String,
+  meet_link: String
 })
 schedulerSchema.set("timestamps",true);
 const Scheduler = mongoose.model("Scheduler",schedulerSchema);

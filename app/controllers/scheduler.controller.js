@@ -39,6 +39,24 @@ exports.getAllEvents =async (req, res) => {
   }
     
 };
+exports.getEventByLink =async (req, res) => {
+  const link =req.query.link
+  try {
+        await Scheduler.find(
+          {
+          },
+          (err, events) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allevents: events });
+            }).where('meet_link').equals(link).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
 exports.patientAllConfirmedEvents =async (req, res) => {
   const _id =req.query._id
   try {
@@ -83,6 +101,8 @@ exports.addEvent = async (req, res) => {
   let patient = await ModelController.getUserByIdWithReturn(req.body.user_id)
   let doctor_name = doctor.firstname + " " + doctor.lastname
   let patient_name = patient.firstname + " " + patient.lastname
+  const room_link =await create_room.createRoom()
+    console.log(room_link.url)
   const event = new Scheduler({
     id: req.body.id,
     start_date: req.body.start_date,
@@ -92,7 +112,8 @@ exports.addEvent = async (req, res) => {
     doctor_id: req.body.doctor_id,
     typeRDV: req.body.typeRDV,
     user_name: patient_name,
-    doctor_name: doctor_name
+    doctor_name: doctor_name,
+    meet_link: room_link.url
   });
   event.save((err, doctor) => {
     if (err) {
@@ -103,8 +124,7 @@ exports.addEvent = async (req, res) => {
     res.send({ message: "event was added successfully!" });
   });
   if(req.body.typeRDV=='visio'){
-    const room_link =await create_room.createRoom()
-    console.log(room_link.url)
+    
     mailOptions={
       to : doctor['email']+','+patient['email'],
       subject : "Lien de la réunion Dr."+doctor_name+" avec "+patient_name+"",
