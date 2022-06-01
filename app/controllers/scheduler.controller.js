@@ -144,12 +144,13 @@ exports.addEvent = async (req, res) => {
   
 };
 exports.updateEvent =(req, res) => {
-  id=req.params.id
-  console.log("id",req.body)
+  id=req.body._id
+  // console.log("id",req.body)
   Scheduler.findByIdAndUpdate({"_id":id}
   ,{"text": req.body.text,
   "start_date": req.body.start_date,
-  "end_date": req.body.end_date
+  "end_date": req.body.end_date,
+  "status": req.body.status
   }
   , function(err, result){
 

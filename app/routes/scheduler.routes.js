@@ -16,7 +16,7 @@ module.exports = function(app) {
     controller.addEvent
   );
   app.put(
-    "/api/scheduler/updateevent/:id",
+    "/api/scheduler/updateevent",
     controller.updateEvent
   );
   app.delete(

@@ -9,7 +9,8 @@ const schedulerSchema = new mongoose.Schema({
   user_name: String,
   doctor_name: String,
   typeRDV: String,
-  meet_link: String
+  meet_link: String,
+  status: { type: String, default: "confirmé" }
 })
 schedulerSchema.set("timestamps",true);
 const Scheduler = mongoose.model("Scheduler",schedulerSchema);
