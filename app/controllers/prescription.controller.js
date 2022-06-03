@@ -45,6 +45,26 @@ exports.patientGetAllPerscriptions =async (req, res) => {
     }
       
   };
+  exports.patientGetPerscriptionsBySchId =async (req, res) => {
+    const _id =req.query._id
+    const scheduler_id = req.query.scheduler_id
+    try {
+          await Prescription.find(
+            {
+            },
+            (err, events) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+                res.send({ allevents: events });
+              }).where("scheduler_id").equals(scheduler_id)
+              .where('user_id').equals(_id).clone();
+    } catch (error) {
+        console.log(error)
+    }
+      
+  };
  
   exports.doctorGetAllPerscriptions =async (req, res) => {
     const _id =req.query._id
