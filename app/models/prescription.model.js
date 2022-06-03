@@ -6,6 +6,7 @@ const prescriptionSchema = new mongoose.Schema({
     doctor_id: String,
     user_name: String,
     doctor_name: String,
+    scheduler_id:String,
 })
 prescriptionSchema.set("timestamps",true);
 const Prescription = mongoose.model("Prescription",prescriptionSchema);

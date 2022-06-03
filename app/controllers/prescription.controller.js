@@ -8,6 +8,7 @@ exports.addPrescription =async (req, res) => {
   let doctor_name = doctor.firstname + " " + doctor.lastname
   let patient_name = patient.firstname + " " + patient.lastname
   const newPrescription = new Prescription({
+    scheduler_id: req.body.scheduler_id,
     drugs: req.body.drugs,
     date: req.body.date,
     user_id: req.body.user_id,
