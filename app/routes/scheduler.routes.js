@@ -10,6 +10,7 @@ module.exports = function(app) {
   });
   app.get("/api/scheduler/getall", controller.getAllEvents);
   app.get("/api/scheduler/patient/getall", controller.patientAllConfirmedEvents);
+  app.get("/api/scheduler/patient/getallClosed", controller.patientAllClosedEvents);
   app.get("/api/scheduler/geteventByLink", controller.getEventByLink);
   app.post(
     "/api/scheduler/newevent",

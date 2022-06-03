@@ -75,6 +75,25 @@ exports.patientAllConfirmedEvents =async (req, res) => {
   }
     
 };
+exports.patientAllClosedEvents =async (req, res) => {
+  const _id =req.query._id
+  try {
+        await Scheduler.find(
+          {
+          },
+          (err, events) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allevents: events });
+            }).where('status').equals('cloturé')
+            .where('user_id').equals(_id).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
 exports.getAllSchedulerWithReturn =async (req, res) => {
   try {
         const events = await Scheduler.find(

@@ -8,7 +8,7 @@ const schedulerSchema = new mongoose.Schema({
   doctor_id: String,
   user_name: String,
   doctor_name: String,
-  typeRDV: String,
+  typeRDV: { type: String, default: "presentiel" },
   meet_link: String,
   status: { type: String, default: "confirmé" }
 })
