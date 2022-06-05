@@ -239,15 +239,13 @@ exports.cancelAppointments =async () => {
     // console.log(allConfirmed)
     for (let i=0; i< allConfirmed.length; i++)
     {
-      console.log("iiiii=", i)
+      // console.log("iiiii=", i)
       let Stringifyy = JSON.stringify(allConfirmed[i])
       let parsed = JSON.parse(Stringifyy)
       let DateMax = Date.parse(parsed['start_date']).addHours(1);
       let Datenow = new Date();
-      // console.log("datemax", DateMax);
-      // console.log("datenow", Datenow);
       let comparaison = Date.compare(DateMax,Datenow)
-      console.log("comparaison", comparaison)
+      // console.log("comparaison", comparaison)
       if(comparaison == -1){
         console.log("App to cancel detected")
         Scheduler.findByIdAndUpdate({"_id":parsed["_id"]}

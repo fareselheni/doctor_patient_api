@@ -58,8 +58,7 @@ exports.patientGetAllPerscriptions =async (req, res) => {
                 return;
               }
                 res.send({ allevents: events });
-              }).where("scheduler_id").equals(scheduler_id)
-              .where('user_id').equals(_id).clone();
+              }).where("scheduler_id").equals(scheduler_id).clone();
     } catch (error) {
         console.log(error)
     }
