@@ -10,6 +10,7 @@ const userSchema =   new mongoose.Schema({
   gouvernorat:String,
   specialite:String,
   image:String,
+  birthdate:String,
   roles: [
     {
       type: mongoose.Schema.Types.ObjectId,

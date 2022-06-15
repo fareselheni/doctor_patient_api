@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+require('dotenv').config()
 const dbConfig = require("./app/config/db.config");
 // const meet_link_email = require("./app/controllers/meet_link_email.controller");
 const SchedulerController = require("./app/controllers/scheduler.controller");
@@ -123,6 +124,7 @@ require("./app/routes/notification.routes")(app);
 require("./app/routes/rating.routes")(app);
 require("./app/routes/prescription.routes")(app);
 require("./app/routes/doctor_api.routes")(app);
+require("./app/routes/paiement.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {

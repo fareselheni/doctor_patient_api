@@ -12,5 +12,6 @@ db.pre_appointment = require("./pre_appointment.model")
 db.rating = require("./rating.model")
 db.prescription = require("./prescription.model")
 db.notification = require("./notification.model")
+db.paiement = require("./paiement.model")
 db.ROLES = ["doctor","patient", "admin"];
 module.exports = db;
