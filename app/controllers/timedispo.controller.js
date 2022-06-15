@@ -42,7 +42,27 @@ exports.updateEvent =(req, res) => {
   Timedispo.findByIdAndUpdate({"_id":id}
   ,{
   "start_date": req.body.start_date,
-  "end_date": req.body.end_date
+  "end_date": req.body.end_date,
+  "paiement_id": req.body.paiement_id,
+  "payed": req.body.payed
+  }
+  , function(err, result){
+
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+
+});
+}
+exports.updateEventByPaiementId =(req, res) => {
+  paiement_id=req.body.paiement_id
+  console.log("id",req.body)
+  Timedispo.findOneAndUpdate({"paiement_id":paiement_id}
+  ,{
+  "payed": req.body.payed
   }
   , function(err, result){
 

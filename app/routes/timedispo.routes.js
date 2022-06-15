@@ -28,6 +28,10 @@ module.exports = function(app) {
     "/api/updatetimedispo/:id",
     controller.updateEvent
   );
+  app.put(
+    "/api/updateByPaiementId",
+    controller.updateEventByPaiementId
+  );
   app.delete(
     "/api/deletetimedispo/:id",
     controller.deleteEvent
