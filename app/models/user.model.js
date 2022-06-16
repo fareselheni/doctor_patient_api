@@ -11,6 +11,7 @@ const userSchema =   new mongoose.Schema({
   specialite:String,
   image:String,
   birthdate:String,
+  prixConsultation:String,
   roles: [
     {
       type: mongoose.Schema.Types.ObjectId,

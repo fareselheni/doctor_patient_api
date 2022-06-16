@@ -18,7 +18,8 @@ exports.signup = (req, res) => {
     gouvernorat:req.body.gouvernorat,
     specialite:req.body.specialite,
     image:req.body.image,
-    birthdate:req.body.birthdate
+    birthdate:req.body.birthdate,
+    prixConsultation:req.body.prixConsultation
   });
   user.save((err, user) => {
     if (err) {
@@ -105,6 +106,7 @@ exports.signin = (req, res) => {
         lastname: user.lastname,
         email: user.email,
         image: user.image,
+        prixConsultation: user.prixConsultation,
         roles: authorities,
         accessToken: token
       });
