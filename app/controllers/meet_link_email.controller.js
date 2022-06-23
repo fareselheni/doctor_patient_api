@@ -13,7 +13,7 @@ var smtpTransport = nodemailer.createTransport({
   service: "gmail",
   auth: {
       user: "servicedpnm@gmail.com",
-      pass: "azerty@12345"
+      pass: "obqjggxxtuflmppr"
   }
 });
 var rand,mailOptions,host,link;

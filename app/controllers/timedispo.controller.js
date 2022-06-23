@@ -62,7 +62,8 @@ exports.updateEventByPaiementId =(req, res) => {
   console.log("id",req.body)
   Timedispo.findOneAndUpdate({"paiement_id":paiement_id}
   ,{
-  "payed": req.body.payed
+  "payed": req.body.payed,
+  "user_payed_id": req.body.user_payed_id
   }
   , function(err, result){
 

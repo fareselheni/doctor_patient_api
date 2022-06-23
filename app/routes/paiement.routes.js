@@ -9,5 +9,7 @@ module.exports = function(app) {
   });
   app.post("/api/paiement/addPaiement", controller.Add);
   app.get("/api/paiement/getDetailPaiement/:id", controller.verify);
+  app.get("/api/paiement/getPaiementbyPaymentId/:id", controller.getPaiementbyPaymentId);
+
 
 };

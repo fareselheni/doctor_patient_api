@@ -9,18 +9,9 @@ const timedispo = db.timedispo;
 */
 var smtpTransport = nodemailer.createTransport({
     service: "gmail",
-    // transport: {
-    //     host: 'smtp.gmail.com',
-    //     port: 465,
-    //     secure: true,
-    //     auth: {
-    //       user: 'servicedpnm@gmail.com',
-    //       pass: 'azerty@12345',
-    //     },
-    //   },
     auth: {
-        user: "mss.rajnikant1996@gmail.com",
-        pass: "yjmzbjwffopbzrnq"
+        user: "servicedpnm@gmail.com",
+        pass: "obqjggxxtuflmppr"
     }
     // auth: {
     //     user: "servicedpnm@gmail.com",

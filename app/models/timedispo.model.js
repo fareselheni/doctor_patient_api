@@ -4,6 +4,7 @@ const timedispoSchema = new mongoose.Schema({
   end_date: String,
   doctor_id: String,
   paiement_id: String,
+  user_payed_id: String,
   payed: { type:Boolean , default: false }
 })
 timedispoSchema.set("timestamps",true);

@@ -65,5 +65,25 @@ module.exports = {
         .catch(err=> {
             console.log(err.message)
         } )
-    }
+    },
+
+    getPaiementbyPaymentId: async (req, res)=>{
+      const payment_id =req.params.id
+      console.log("paramsss", req.params)
+      try {
+            await Paiement.find(
+              {
+              },
+              (err, paiement) => {
+                if (err) {
+                  res.status(500).send({ message: err });
+                  return;
+                }
+                  res.send(paiement);
+                }).where('payment_id').equals(payment_id).clone();
+      } catch (error) {
+          console.log(error)
+      }
+  }
+
 }
