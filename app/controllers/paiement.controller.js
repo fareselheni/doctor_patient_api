@@ -69,7 +69,6 @@ module.exports = {
 
     getPaiementbyPaymentId: async (req, res)=>{
       const payment_id =req.params.id
-      console.log("paramsss", req.params)
       try {
             await Paiement.find(
               {
@@ -84,6 +83,25 @@ module.exports = {
       } catch (error) {
           console.log(error)
       }
-  }
+  },
 
+  updatePaiementByPaiementId : async (req, res) => {
+    paiement_id=req.body.paiement_id
+    console.log("id",req.body)
+    Paiement.findOneAndUpdate({"payment_id":paiement_id}
+    ,{
+    "status": req.body.status,
+    }
+    , function(err, result){
+  
+      if(err){
+          res.send(err)
+      }
+      else{
+          res.send(result)
+      }
+  
+  });
+
+  }
 }
