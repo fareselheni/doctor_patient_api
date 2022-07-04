@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require('dotenv').config()
 const dbConfig = require("./app/config/db.config");
-// const meet_link_email = require("./app/controllers/meet_link_email.controller");
+const meet_link_email = require("./app/controllers/meet_link_email.controller");
 const SchedulerController = require("./app/controllers/scheduler.controller");
 
 const app = express();
@@ -106,7 +106,7 @@ app.get("/", (req, res) => {
 });
 
 //meet_link_email
-// meet_link_email.sendDailyEmails()
+meet_link_email.sendDailyEmails()
 
 //////CANCEL APPOINTMENTS
 SchedulerController.cancelAppointments()
