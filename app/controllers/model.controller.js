@@ -76,3 +76,4 @@ exports.getAllspecialites =async (req, res) => {
           res.send({ allspecialites:  specialites });
         }).clone();
 };
+
