@@ -1,5 +1,4 @@
 const db = require("../models");
-const { where } = require("../models/user.model");
 const ModelController = require('./model.controller');
 const Pre_appointment = db.pre_appointment;
 exports.UsergetAllPreApp =async (req, res) => {

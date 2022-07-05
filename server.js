@@ -125,6 +125,7 @@ require("./app/routes/rating.routes")(app);
 require("./app/routes/prescription.routes")(app);
 require("./app/routes/doctor_api.routes")(app);
 require("./app/routes/paiement.routes")(app);
+require("./app/routes/signal.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
