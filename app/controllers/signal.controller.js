@@ -1,5 +1,6 @@
 const db = require("../models");
 const Signal = db.signal;
+const User = db.user;
 const ModelController = require('./model.controller');
 
 exports.getNbSignalbyUserId =async (req, res) => {
@@ -88,4 +89,35 @@ exports.addSignal =async (req, res) => {
       
   };
 
+  exports.updateUserSignalNb =(req, res) => {
+    user_id=req.body.user_id
+    console.log("id",req.body)
+    User.updateOne(
+      {_id: user_id},
+      { $inc: { nbSignal: 1 } }, function(err, result){
 
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.send(result)
+        }
+    
+    }
+    )
+
+  }
+  exports.orderPatientBySignal =(req, res) => {
+    let z = User.find( {}, function(err, result){
+
+      if(err){
+          res.send(err)
+      }
+      else{
+          res.send({ordredList: result})
+      }
+  
+  }
+       ).sort({ nbSignal : -1 }).where('roles').in(["623459c08c4edb43dbb9ec12"]).clone()
+
+  }

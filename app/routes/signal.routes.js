@@ -9,10 +9,15 @@ module.exports = function(app) {
   });
   app.get("/api/signal/getNbByUserId", controller.getNbSignalbyUserId);
   app.get("/api/signal/check", controller.CheckExistingSignal);
+  app.get("/api/signal/patientOrderBySignal", controller.orderPatientBySignal);
 
   app.post(
     "/api/signal/add",
     controller.addSignal
+  );
+  app.put(
+    "/api/signal/updateSignal",
+    controller.updateUserSignalNb
   );
 
 };

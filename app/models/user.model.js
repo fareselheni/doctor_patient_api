@@ -12,6 +12,7 @@ const userSchema =   new mongoose.Schema({
   image:String,
   birthdate:String,
   prixConsultation:String,
+  nbSignal: { type: Number, default: 0 },
   roles: [
     {
       type: mongoose.Schema.Types.ObjectId,
