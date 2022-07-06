@@ -71,3 +71,21 @@ exports.addSignal =async (req, res) => {
   };
 
 
+  exports.CheckExistingSignal =async (req, res) => {
+    const user_id =req.query.user_id
+    const doctor_id =req.query.doctor_id
+    try {
+      let nbSignal = await this.getSignalWithReturn(user_id,doctor_id)
+      let length = nbSignal.length
+      let resp =true
+      if(length>0){
+        resp = false;
+      }
+      res.send({Signal: resp})
+    } catch (error) {
+        console.log(error)
+    }
+      
+  };
+
+

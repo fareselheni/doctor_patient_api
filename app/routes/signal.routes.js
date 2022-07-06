@@ -8,6 +8,7 @@ module.exports = function(app) {
     next();
   });
   app.get("/api/signal/getNbByUserId", controller.getNbSignalbyUserId);
+  app.get("/api/signal/check", controller.CheckExistingSignal);
 
   app.post(
     "/api/signal/add",
