@@ -2,73 +2,100 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
-const Specialite = db.specialite
+const Blacklist = db.blacklist;
+const Specialite = db.specialite;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
-exports.signup = (req, res) => {
-  console.log(req.body)
-  const user = new User({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    adresse: req.body.adresse,
-    phone_number: req.body.phone_number,
-    gender: req.body.gender,
-    password: bcrypt.hashSync(req.body.password, 8),
-    gouvernorat:req.body.gouvernorat,
-    specialite:req.body.specialite,
-    image:req.body.image,
-    birthdate:req.body.birthdate,
-    prixConsultation:req.body.prixConsultation
-  });
-  user.save((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
+
+// exports.getBlacklistWithReturn =async (id) =>{
+//   try {
+//       const blacklist = await Blacklist.find().exec();
+//       return blacklist
+//   } catch (error) {
+//       console.log(error)
+//   }
+// };
+
+exports.checkInBlacklist =async (tel) =>{
+  try {
+    let check = false
+    let blacklist = await Blacklist.find().exec();
+    // console.log("ggbb",blacklist)
+    for (let index = 0; index < blacklist.length; index++) {
+      const element = blacklist[index];
+      if (element.phone_number === tel){
+        check = true
+      }
     }
+    return check;
 
+  } catch (error) {
+      console.log(error)
+  }
+};
+
+exports.signup =  async  (req, res) => {
+
+  let checkForBlacklist = await this.checkInBlacklist(req.body.phone_number)
+  console.log(checkForBlacklist)
+
+  if (checkForBlacklist === true) {
     
-    // if (req.body.specialites) {
-    //   Specialite.find(
-    //     {
-    //       name: { $in: req.body.specialites }
-    //     },
-    //     (err, sp) => {
-    //       if (err) {
-    //         res.status(500).send({ messagefind: err });
-    //         return;
-    //       }
-          
-    //       user.specialites = sp.map(spec => spec._id);
-    //       console.log('sp',user)
-    //     }
-    //   );
-    // }
+    res.status(500).send({ message: "vous etes placé dans la liste noire!" });
 
-    if (req.body.roles) {
-      Role.find(
-        {
-          name: { $in: req.body.roles }
-        },
-        (err, roles) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-          user.roles = roles.map(role => role._id);
-          console.log('rp',user)
-          user.save(err => {
+  } else {
+    
+    const user = new User({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      adresse: req.body.adresse,
+      phone_number: req.body.phone_number,
+      gender: req.body.gender,
+      password: bcrypt.hashSync(req.body.password, 8),
+      gouvernorat:req.body.gouvernorat,
+      specialite:req.body.specialite,
+      image:req.body.image,
+      birthdate:req.body.birthdate,
+      prixConsultation:req.body.prixConsultation
+    });
+    user.save((err, user) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+  
+      
+  
+      if (req.body.roles) {
+        Role.find(
+          {
+            name: { $in: req.body.roles }
+          },
+          (err, roles) => {
             if (err) {
               res.status(500).send({ message: err });
               return;
             }
-            res.send({ message: "User was registered successfully!" });
-          });
-        }
-      );
+            user.roles = roles.map(role => role._id);
+            console.log('rp',user)
+            user.save(err => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+              res.send({ message: "User was registered successfully!" });
+            });
+          }
+        );
+      }
+  
     }
+    );
 
-  });
+  }
+
+  
 };
 exports.signin = (req, res) => {
   User.findOne({

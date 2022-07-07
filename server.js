@@ -4,6 +4,7 @@ require('dotenv').config()
 const dbConfig = require("./app/config/db.config");
 const meet_link_email = require("./app/controllers/meet_link_email.controller");
 const SchedulerController = require("./app/controllers/scheduler.controller");
+const Authcontroller = require("./app/controllers/auth.controller");
 
 const app = express();
 
@@ -110,6 +111,9 @@ meet_link_email.sendDailyEmails()
 
 //////CANCEL APPOINTMENTS
 SchedulerController.cancelAppointments()
+
+//// blacklist
+Authcontroller.checkInBlacklist()
 
 // routes
 require("./app/routes/auth.routes")(app);
