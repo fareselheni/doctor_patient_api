@@ -112,3 +112,19 @@ exports.signin = (req, res) => {
       });
     });
 };
+
+exports.deleteUser = (req, res) => {
+  id=req.params.id
+  User.findByIdAndDelete({"_id":id}
+  , function(err, result){
+
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+
+})
+  
+};

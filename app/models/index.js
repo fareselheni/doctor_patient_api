@@ -14,5 +14,6 @@ db.prescription = require("./prescription.model")
 db.notification = require("./notification.model")
 db.paiement = require("./paiement.model")
 db.signal = require("./signal.model")
+db.blacklist = require("./blacklist.model")
 db.ROLES = ["doctor","patient", "admin"];
 module.exports = db;
