@@ -128,6 +128,7 @@ require("./app/routes/notification.routes")(app);
 require("./app/routes/rating.routes")(app);
 require("./app/routes/prescription.routes")(app);
 require("./app/routes/doctor_api.routes")(app);
+require("./app/routes/admin_api.routes")(app);
 require("./app/routes/paiement.routes")(app);
 require("./app/routes/signal.routes")(app);
 require("./app/routes/blacklist.routes")(app);
