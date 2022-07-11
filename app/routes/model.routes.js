@@ -9,6 +9,9 @@ module.exports = function(app) {
     next();
   });
   app.get("/api/model/allusers", controller.getAllUsers);
+  app.get("/api/model/alldoctors", controller.getAllDoctors);
+  app.get("/api/model/allpatients", controller.getAllPatients);
+  app.get("/api/model/alladmins", controller.getAllAdmins);
   app.get("/api/model/getDoctorById/:id", controller.getUserbyId);
   app.get("/api/model/allspecialite", controller.getAllspecialites);
   app.get("/api/model/allgouvernorats", controller.getAllGouvernorats);

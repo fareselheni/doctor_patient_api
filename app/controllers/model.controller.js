@@ -20,6 +20,57 @@ exports.getAllUsers =async (req, res) => {
   }
     
 };
+exports.getAllDoctors =async (req, res) => {
+  try {
+        await User.find(
+          {
+          },
+          (err, users) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allusers: users });
+            }).where('roles').in(["623459c08c4edb43dbb9ec11"]).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
+exports.getAllPatients =async (req, res) => {
+  try {
+        await User.find(
+          {
+          },
+          (err, users) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allusers: users });
+            }).where('roles').in(["623459c08c4edb43dbb9ec12"]).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
+exports.getAllAdmins =async (req, res) => {
+  try {
+        await User.find(
+          {
+          },
+          (err, users) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+              res.send({ allusers: users });
+            }).where('roles').in(["623459c08c4edb43dbb9ec10"]).clone();
+  } catch (error) {
+      console.log(error)
+  }
+    
+};
 exports.getUserbyId =async (req, res) => {
   const _id =req.params.id
   try {
