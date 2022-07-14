@@ -7,6 +7,7 @@ module.exports = function(app) {
     );
     next();
   });
+  app.get("/api/dashboard/admin/allApp", controller.CountAllAppointments);
   app.get("/api/dashboard/admin/countWeekApp", controller.CountThisweekAppointments);
   app.get("/api/dashboard/admin/PourcentageweekAppointments", controller.PourcentageweekAppointments);
   app.get("/api/dashboard/admin/countTodayApp", controller.CountTodayAppointments);
