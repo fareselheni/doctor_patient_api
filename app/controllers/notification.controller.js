@@ -73,3 +73,20 @@ exports.GetAllNotifications =async (req, res) => {
   }
     
 };
+
+exports.updateSeenNotification =(req, res) => {
+  id=req.body.id
+  Notification.findByIdAndUpdate({"_id":id}
+  ,{"seen": true,
+  }
+  , function(err, result){
+
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+
+});
+}
