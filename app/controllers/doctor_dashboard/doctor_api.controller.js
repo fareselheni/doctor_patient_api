@@ -1,7 +1,27 @@
 require("datejs");
 const db = require("../../models");
 const Scheduler = db.scheduler;
-  
+
+    exports.CountAllAppointments =async (req, res) => {
+        const doctor_id =req.query.doctor_id
+        try {
+            var length = await Scheduler.countDocuments({doctor_id:doctor_id}, function (err, count) {
+                if (err){
+                    console.log(err)
+                }else{
+                    return count
+                }
+            }).clone();
+            
+            res.json({result: length})
+
+
+        } catch (error) {
+            console.log(error)
+        }
+        
+    };
+
   exports.CountThisweekAppointments =async (req, res) => {
     const doctor_id =req.query.doctor_id
     try {
