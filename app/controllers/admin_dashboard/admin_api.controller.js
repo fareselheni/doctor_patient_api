@@ -21,6 +21,25 @@ const Scheduler = db.scheduler;
         
     };
 
+    exports.CountCanceledAppointments =async (req, res) => {
+        try {
+            var length = await Scheduler.countDocuments({status:"annulé"}, function (err, count) {
+                if (err){
+                    console.log(err)
+                }else{
+                    return count
+                }
+            }).clone();
+            
+            res.json({result: length})
+
+
+        } catch (error) {
+            console.log(error)
+        }
+        
+    };
+
 
   exports.CountThisweekAppointments =async (req, res) => {
     try {

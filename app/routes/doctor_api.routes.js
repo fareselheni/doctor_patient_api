@@ -8,6 +8,7 @@ module.exports = function(app) {
     next();
   });
   app.get("/api/dashboard/doctor/allApp", controller.CountAllAppointments);
+  app.get("/api/dashboard/doctor/canceledApp", controller.CountCanceledAppointments);
   app.get("/api/dashboard/doctor/countWeekApp", controller.CountThisweekAppointments);
   app.get("/api/dashboard/doctor/PourcentageweekAppointments", controller.PourcentageweekAppointments);
   app.get("/api/dashboard/doctor/countTodayApp", controller.CountTodayAppointments);
