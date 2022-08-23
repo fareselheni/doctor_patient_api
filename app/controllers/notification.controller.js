@@ -66,7 +66,7 @@ exports.GetAllNotifications =async (req, res) => {
               return;
             }
               res.send({ allNotifications: events });
-            }).where('user_id').equals(user_id).limit(5).clone();
+            }).where('user_id').equals(user_id).sort('asc').limit(5).clone();
             // 
   } catch (error) {
       console.log(error)

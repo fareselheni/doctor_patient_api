@@ -46,8 +46,8 @@ const Scheduler = db.scheduler;
     const doctor_id =req.query.doctor_id
     try {
         var length = await Scheduler.countDocuments({doctor_id:doctor_id,start_date: {
-            $gt: Date.today().addWeeks(-1).toISOString(), 
-            $lt: Date.today().toISOString()
+            $gt: Date.today().toISOString(), 
+            $lt: Date.today().addWeeks(1).toISOString()
         }}, function (err, count) {
             if (err){
                 console.log(err)
@@ -249,8 +249,8 @@ const Scheduler = db.scheduler;
     try {
         var monday = await Scheduler.countDocuments({doctor_id:doctor_id
             ,start_date: {
-                $gte:Date.last().monday().toISOString() ,
-                $lt: Date.last().monday().addDays(1).toISOString() ,
+                $gte:Date.monday().toISOString() ,
+                $lt: Date.monday().addDays(1).toISOString() ,
             }
         }, function (err, count) {
             if (err){
@@ -261,8 +261,8 @@ const Scheduler = db.scheduler;
         }).clone();
         var tuesday = await Scheduler.countDocuments({doctor_id:doctor_id
             ,start_date: {
-                $gte:Date.last().tuesday().toISOString() ,
-                $lt: Date.last().tuesday().addDays(1).toISOString() ,
+                $gte:Date.tuesday().toISOString() ,
+                $lt: Date.tuesday().addDays(1).toISOString() ,
             }
         }, function (err, count) {
             if (err){
@@ -273,8 +273,8 @@ const Scheduler = db.scheduler;
         }).clone();
         var wednesday = await Scheduler.countDocuments({doctor_id:doctor_id
             ,start_date: {
-                $gte:Date.last().wednesday().toISOString() ,
-                $lt: Date.last().wednesday().addDays(1).toISOString() ,
+                $gte:Date.wednesday().toISOString() ,
+                $lt: Date.wednesday().addDays(1).toISOString() ,
             }
         }, function (err, count) {
             if (err){
@@ -285,8 +285,8 @@ const Scheduler = db.scheduler;
         }).clone();
         var thursday = await Scheduler.countDocuments({doctor_id:doctor_id
             ,start_date: {
-                $gte:Date.last().thursday().toISOString() ,
-                $lt: Date.last().thursday().addDays(1).toISOString() ,
+                $gte:Date.thursday().toISOString() ,
+                $lt: Date.thursday().addDays(1).toISOString() ,
             }
         }, function (err, count) {
             if (err){
@@ -297,8 +297,8 @@ const Scheduler = db.scheduler;
         }).clone();
         var friday = await Scheduler.countDocuments({doctor_id:doctor_id
             ,start_date: {
-                $gte:Date.last().friday().toISOString() ,
-                $lt: Date.last().friday().addDays(1).toISOString() ,
+                $gte:Date.friday().toISOString() ,
+                $lt: Date.friday().addDays(1).toISOString() ,
             }
         }, function (err, count) {
             if (err){
@@ -309,8 +309,8 @@ const Scheduler = db.scheduler;
         }).clone();
         var saturday = await Scheduler.countDocuments({doctor_id:doctor_id
             ,start_date: {
-                $gte:Date.last().saturday().toISOString() ,
-                $lt: Date.last().saturday().addDays(1).toISOString() ,
+                $gte:Date.saturday().toISOString() ,
+                $lt: Date.saturday().addDays(1).toISOString() ,
             }
         }, function (err, count) {
             if (err){
